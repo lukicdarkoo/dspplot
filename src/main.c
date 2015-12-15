@@ -22,6 +22,7 @@ int main() {
 		buffer[i] = buffer_first[i] + buffer_second[i];
 	}
 	
+	plot_file((double *)buffer, LEN, sizeof(Int16), "test.pcm");
 
 	plot_y((double *)buffer, LEN, sizeof(Int16));
 

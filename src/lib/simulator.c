@@ -52,3 +52,18 @@ void plot_fft_y(double* y, int length, int size) {
 
 	plot_y(buffer_fft_array, length, sizeof(double)); 
 }
+
+
+int plot_file(double* y, int length, int size, char *filename) {
+  FILE * pFile;
+  pFile = fopen (filename, "wb");
+  if(pFile == NULL) {
+      return -1;
+  }
+	if (size == 2) {
+		fwrite (y, size, length, pFile);
+	}
+  fclose (pFile);
+	return 0;
+}
+

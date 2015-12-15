@@ -32,4 +32,7 @@ extern void plot_y(double *y, int length, int size);
 // Plot will calculate FFT and automatically set values for x axis
 extern void plot_fft_y(double* y, int length, int size);
 
+// Prepare data for Audacity
+extern int plot_file(double* y, int length, int size, char *filename);
+
 #endif
