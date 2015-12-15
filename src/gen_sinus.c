@@ -4,43 +4,46 @@
 
 #define PI 3.14159265
 
-void gen_sinus(int n, float a, float f, float ph, float buffer[])
+/********************************************************************
+ * Generisanje sinusnog signala upotrebom tabele pretrazivanja
+ *   n - broj odbiraka
+ *   a - amplituda (u opsegu 0 - 1.0)
+ *   f - frekvencija (normalizovana)
+ *   ph - fazni pomeraj
+ *   buffer - niz u kome ce biti smesten izlazni signal
+ *********************************************************************/
+
+void gen_sinus_table(int n, float a, float f, float ph, Int16 buffer[])
 {
-	int i;
-	for (i=0; i<n; i++)
-	{
-		buffer[i] = a * sin(2 * PI * f * i + ph);
+	int N = SINE_TABLE_SIZE;
+	//int delta = N * (f / 8000);
+	int delta = N * f;
+	float final;
+
+	int m = (ph * SINE_TABLE_SIZE) / (2 * PI);
+
+	int i = 0;
+	for (i=0; i < n; i++) {
+		m += delta;
+		if (m >= N) {
+			m -= N;
+		}
+		// Int16 k = (int)(ph + i * delta) % N;
+		int k = m % N - 1;
+
+		if (k <= N/4) {
+			final = p_sine_table[k];
+		}
+		else if (k <= N/2) {
+			final = p_sine_table[N/2 - k];
+		}
+		else if (k <= 3*N/4) {
+			final = - p_sine_table[k - N/2];
+		}
+		else {
+			final = - p_sine_table[N - k];
+		}
+
+		buffer[i] = a * final;
 	}
-}
-
-void gen_sinus_table(int n, float a, float f, float ph, float buffer[])
-{
-	/* TO DO: Generate sine wave using look up table */
-}
-
-void gen_sinus_multiton(int n, float a, float f0, float df, float ph, float buffer[])
-{
-	/* TO DO: Generate multitone sine wave */
-}
-
-void gen_lin_sweep(int n, float a, float f1, float f2, float ph, float buffer[])
-{
-    /* TO DO: Generate linear sweep sine wave*/
-}
-
-void gen_log_sweep(int n, float a, float f1, float f2, float ph, float buffer[])
-{
-    int i = 0;
-    float df = log(f2/f1)/n;
-    float f = f1;
-    for(i = 0; i < n; i++)
-    {
-    	buffer[i] = a*sin(2*PI*f*i+ph);
-    	f=f*exp(df);
-    }
-}
-
-void gen_square(int n, float a, float b, int na, int nb, float buffer[])
-{
-    /* TO DO: Generate square wave */
 }

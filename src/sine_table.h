@@ -1,15 +1,21 @@
-/*
- * sine_table.h
- *
- *  Created on: Sep 3, 2015
- *      Author: Dekka
- */
+//////////////////////////////////////////////////////////////////////////////
+// *
+// * Predmetni projekat iz predmeta OAiS DSP 1
+// * Godina: 2015
+// *
+// * Tabela pretrazivanja koja sluzi za generisanje sinusnih signala
+// * Tabela sadrzi vrednosti sinusa u prvom kvadrantu
+// * Velicina tabele: 1000 odbiraka
+// *
+//////////////////////////////////////////////////////////////////////////////
 
-#ifndef SINE_TABLE_H_
-#define SINE_TABLE_H_
+#ifndef DTMF_PREDAJNIK_SINE_TABLE_H_
+#define DTMF_PREDAJNIK_SINE_TABLE_H_
 
-#define SINE_TABLE_SIZE 1024
+#define SINE_TABLE_SIZE 1000
 
-extern float* p_sine_table;
+#include "lib/simulator.h"
 
-#endif /* SINE_TABLE_H_ */
+extern Int16* p_sine_table;
+
+#endif /* DTMF_PREDAJNIK_SINE_TABLE_H_ */
