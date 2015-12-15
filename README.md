@@ -12,5 +12,19 @@ Pattern to plot data in C
 - Run example `./bin/dspplot`
 
 ## Plotting
-- `plot(float* x_array, float* y_array, int length_of_array)` or
-- `plot_y(float* y_array, int length_of_array)`
+x - array for x axis (to avoid warnings cast to double *)  
+y - array for y axis (to avoid warnings cast to double *)  
+length - array length  
+size - sizeof(data type)  
+  
+Standard plot  
+```plot(double* x, double* y, int length, int size)```
+  
+Plot will automatically set values for x axis   
+```plot_y(double *y, int length, int size)```
+  
+Plot will calculate FFT and automatically set values for x axis  
+```extern void plot_fft_y(double* y, int length, int size)```
+  
+Prepare data for Audacity  
+```plot_file(double* y, int length, int size, char *filename)```
